@@ -35,7 +35,7 @@ using namespace pybind11::literals;
 
 void rand(py::module &m)
 {
-  m.def("rnorm", py::overload_cast<void>(&rnorm));
+  m.def("rnorm", py::overload_cast<>(&rnorm));
   m.def("rnorm", py::overload_cast<const double, const double>(&rnorm));
   m.def("rnorm", py::overload_cast<const double, const double, const uint64_t>(&rnorm));
   m.def("rnorm", py::overload_cast<const double, const double, rand_engine_t&>(&rnorm));
