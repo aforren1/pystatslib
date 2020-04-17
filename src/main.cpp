@@ -2,11 +2,6 @@
 #define _Pragma __pragma
 #endif
 #include <pybind11/pybind11.h>
-#include <pybind11/eigen.h>
-#define STATS_ENABLE_EIGEN_WRAPPERS
-#include "stats.hpp"
-
-using Mxd = Eigen::MatrixXd;
 
 // ----------------
 // Python interface
