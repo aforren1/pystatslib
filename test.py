@@ -11,3 +11,6 @@ mu = 0
 sigma = 1
 
 sl.dnorm(x, mu, sigma)
+sl.dnorm(x, mu, sigma, True)
+sl.dnorm(x, mu, sigma, False)
+sl.
