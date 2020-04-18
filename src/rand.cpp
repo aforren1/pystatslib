@@ -8,7 +8,7 @@ using Mxi = Eigen::Matrix<uint32_t, -1, -1>;
 using rand_engine_t = std::mt19937_64;
 
 #define declD(arg) const double arg
-#define declI(arg) const uint32_t arg // TODO: check?
+#define declI(arg) const uint32_t arg // TODO: check 32 or 64 bit? it's "uint_t" in the docs
 #define declN(arg)
 #define declDim(arg) const uint64_t n, const uint64_t k
 #define declSeed(arg) const uint64_t seed_val = std::random_device{}()
@@ -84,30 +84,41 @@ RAND2_d(Rbeta)
 // ----------------
 
 #define Types1d_1 const double
-#define Types1d_2 const double, const uint64_t
-#define Types1d_3 const double, rand_engine_t&
-#define Types1d_4 const uint64_t, const uint64_t, const double
+#define Types1d_2 Types1d_1, const uint64_t
+#define Types1d_3 Types1d_1, rand_engine_t&
+#define Types1d_4 const uint64_t, const uint64_t, Types1d_1
 
 #define Types2d_1 const double, const double
-#define Types2d_2 const double, const double, const uint64_t
-#define Types2d_3 const double, const double, rand_engine_t&
-#define Types2d_4 const uint64_t, const uint64_t, const double, const double
+#define Types2d_2 Types2d_1, const uint64_t
+#define Types2d_3 Types2d_1, rand_engine_t&
+#define Types2d_4 const uint64_t, const uint64_t, Types2d_1
+
+// for binomial
+#define Types2i_1 const uint32_t, const double
+#define Types2i_2 Types2i_1, const uint64_t
+#define Types2i_3 Types2i_1, rand_engine_t&
+#define Types2i_4 const uint64_t, const uint64_t, Types2i_1
+
+#define PybindDefs_1d(FUN, funstr, parname1, docstring) \
+m.def(funstr, py::overload_cast<Types1d_1>(&fn##FUN), docstring, py::arg(parname1)); \
+m.def(funstr, py::overload_cast<Types1d_2>(&fn##FUN), "", py::arg(parname1), "seed_val"_a); \
+m.def(funstr, py::overload_cast<Types1d_3>(&fn##FUN), "", py::arg(parname1), "engine"_a); \
+m.def(funstr, py::overload_cast<Types1d_4>(&fn##FUN), "", "n"_a, "k"_a, py::arg(parname1));
+
+#define PybindDefs_2d(FUN, funstr, parname1, parname2, docstring) \
+m.def(funstr, py::overload_cast<Types2d_1>(&fn##FUN), docstring, py::arg(parname1), py::arg(parname2)); \
+m.def(funstr, py::overload_cast<Types2d_2>(&fn##FUN), "", py::arg(parname1), py::arg(parname2), "seed_val"_a); \
+m.def(funstr, py::overload_cast<Types2d_3>(&fn##FUN), "", py::arg(parname1), py::arg(parname2), "engine"_a); \
+m.def(funstr, py::overload_cast<Types2d_4>(&fn##FUN), "", "n"_a, "k"_a, py::arg(parname1), py::arg(parname2));
 
 namespace py = pybind11;
 using namespace pybind11::literals;
 
 void rand(py::module &m)
 {
-  m.def("rnorm", py::overload_cast<>(&rnorm), "Here's the proper rnorm docstring.");
-  m.def("rnorm", py::overload_cast<Types2d_1>(&rnorm), "", "mu"_a, "sigma"_a);
-  m.def("rnorm", py::overload_cast<Types2d_2>(&rnorm), "", "mu"_a, "sigma"_a, "seed_val"_a);
-  m.def("rnorm", py::overload_cast<Types2d_3>(&rnorm), "", "mu"_a, "sigma"_a, "engine"_a);
-  m.def("rnorm", py::overload_cast<Types2d_4>(&rnorm), "", "n"_a, "k"_a, "mu"_a, "sigma"_a);
-
-  m.def("rbern", py::overload_cast<Types1d_1>(&rbern));
-  m.def("rbern", py::overload_cast<Types1d_2>(&rbern));
-  m.def("rbern", py::overload_cast<Types1d_3>(&rbern));
-  m.def("rbern", py::overload_cast<Types1d_4>(&rbern));
+  m.def("rnorm", py::overload_cast<>(&rnorm), "Random numbers the Normal (Gaussian) distribution.");
+  PybindDefs_2d(Rnorm, "rnorm", "mu", "sigma", "") // no docstring
+  PybindDefs_1d(Rbern, "rbern", "p", "Random numbers from the Bernoulli distribution.")
 
   py::class_<std::mt19937_64>(m, "Engine")
       .def(py::init<int>());
