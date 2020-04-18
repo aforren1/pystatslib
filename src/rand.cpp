@@ -71,6 +71,7 @@ temp##Temp ( ele##Type1(arg1) comma##Type2 \
 
 // function, return type, template type, arg1 type, arg2 type, arg3 type, arg4 type (seed or rng)
 GRAND(Rnorm, D, N, N, N, N, N) // special case: rnorm can take no args to give standard normal
+GRAND(Runif, D, N, N, N, N, N) // special case: runif can take no args to give Unif(0, 1)
 
 // just bernoulli? TODO make sure ints are returned (right now floats)
 #define RAND_bern(FUN) \
@@ -162,6 +163,7 @@ using namespace pybind11::literals;
 void rand(py::module &m)
 {
   m.def("rnorm", py::overload_cast<>(&rnorm), "Random numbers from the Normal (Gaussian) distribution.");
+  m.def("runif", py::overload_cast<>(&runif), "Random numbers from the Uniform distribution.")
   PybindDefs_2d(Rnorm, "rnorm", "mu", "sigma", "") // no docstring
   PybindDefs_1d(Rbern, "rbern", "prob", "Bernoulli")
   PybindDefs_2d(Rbeta, "rbeta", "a", "b", "Beta")
@@ -177,7 +179,7 @@ void rand(py::module &m)
   PybindDefs_2d(Rlogis, "rlogis", "mu", "sigma", "Logistic")
   PybindDefs_1d(Rpois, "rpois", "rate", "Poisson")
   PybindDefs_1d(Rt, "rt", "dof", "Student's t")
-  PybindDefs_2d(Runif, "runif", "a", "b", "Uniform")
+  PybindDefs_2d(Runif, "runif", "a", "b", "")
   PybindDefs_2d(Rweibull, "rweibull", "shape", "scale", "Weibull")
 
   //m.def("rpois", py::overload_cast<const double, const uint64_t>(&stats::rpois));
