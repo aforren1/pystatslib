@@ -163,7 +163,7 @@ using namespace pybind11::literals;
 void rand(py::module &m)
 {
   m.def("rnorm", py::overload_cast<>(&rnorm), "Random numbers from the Normal (Gaussian) distribution.");
-  m.def("runif", py::overload_cast<>(&runif), "Random numbers from the Uniform distribution.")
+  m.def("runif", py::overload_cast<>(&runif), "Random numbers from the Uniform distribution.");
   PybindDefs_2d(Rnorm, "rnorm", "mu", "sigma", "") // no docstring
   PybindDefs_1d(Rbern, "rbern", "prob", "Bernoulli")
   PybindDefs_2d(Rbeta, "rbeta", "a", "b", "Beta")
