@@ -3,7 +3,8 @@
 	url = https://github.com/kthohr/gcem
 [submodule "stats"]
 	path = deps/stats
-	url = https://github.com/kthohr/stats
+	url = https://github.com/aforren1/stats
+        branch = typo
 [submodule "eigen"]
 	path = deps/eigen
 	url = https://gitlab.com/libeigen/eigen
