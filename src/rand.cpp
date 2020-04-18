@@ -11,6 +11,17 @@
 #define fnRcauchy rcauchy
 #define fnRchisq rchisq
 #define fnRexp rexp
+#define fnRf rf
+#define fnRgamma rgamma
+#define fnRinvgamma rinvgamma
+#define fnRlaplace rlaplace
+#define fnRlnorm rlnorm
+#define fnRlogis rlogis
+#define fnRpois rpois
+#define fnRt rt
+#define fnRunif runif
+#define fnRweibull rweibull
+// TODO multivariate distributions
 
 
 using Mxd = Eigen::MatrixXd;
@@ -93,7 +104,18 @@ RAND_bern(Rbern)
 RAND2_d(Rbeta)
 RAND_binom(Rbinom)
 RAND2_d(Rcauchy)
-
+RAND1_d(Rchisq)
+RAND1_d(Rexp)
+RAND2_d(Rf)
+RAND2_d(Rgamma)
+RAND2_d(Rinvgamma)
+RAND2_d(Rlaplace)
+RAND2_d(Rlnorm)
+RAND2_d(Rlogis)
+RAND_bern(Rpois)
+RAND1_d(Rt)
+RAND2_d(Runif)
+RAND2_d(Rweibull)
 // ----------------
 // Python interface
 // ----------------
@@ -144,6 +166,19 @@ void rand(py::module &m)
   PybindDefs_1d(Rbern, "rbern", "prob", "Bernoulli")
   PybindDefs_2d(Rbeta, "rbeta", "a", "b", "Beta")
   PybindDefs_2i(Rbinom, "rbinom", "n_trials", "prob", "Binomial")
+  PybindDefs_2d(Rcauchy, "rcauchy", "mu", "sigma", "Cauchy")
+  PybindDefs_1d(Rchisq, "rchisq", "dof", "Chi-squared")
+  PybindDefs_1d(Rexp, "rexp", "rate", "Exponential")
+  PybindDefs_2d(Rf, "rf", "df1", "df2", "F")
+  PybindDefs_2d(Rgamma, "rgamma", "shape", "scale", "Gamma")
+  PybindDefs_2d(Rinvgamma, "rinvgamma", "shape", "scale", "Inverse-Gamma")
+  PybindDefs_2d(Rlaplace, "rlaplace", "mu", "sigma", "Laplace")
+  PybindDefs_2d(Rlnorm, "rlnorm", "mu", "sigma", "Log-Normal")
+  PybindDefs_2d(Rlogis, "rlogis", "mu", "sigma", "Logistic")
+  PybindDefs_1d(Rpois, "rpois", "rate", "Poisson")
+  PybindDefs_1d(Rt, "rt", "dof", "Student's t")
+  PybindDefs_2d(Runif, "runif", "a", "b", "Uniform")
+  PybindDefs_2d(Rweibull, "rweibull", "shape", "scale", "Weibull")
 
   //m.def("rpois", py::overload_cast<const double, const uint64_t>(&stats::rpois));
 
