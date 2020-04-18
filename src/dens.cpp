@@ -2,9 +2,32 @@
 #include <pybind11/eigen.h>
 #define STATS_ENABLE_EIGEN_WRAPPERS
 #include "stats.hpp"
+#include "pystats_internals.hpp"
 
-using Mxd = Eigen::MatrixXd;
-//using MatrixXdR = Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>;
+// define all distributions
+#define fnDnorm dnorm
+#define fnDbern dbern
+#define fnDbeta dbeta
+#define fnDbinom dbinom
+#define fnDcauchy dcauchy
+#define fnDchisq dchisq
+#define fnDexp dexp
+#define fnDf df
+#define fnDgamma dgamma
+#define fnDinvgamma dinvgamma
+#define fnDlaplace dlaplace
+#define fnDlnorm dlnorm
+#define fnDlogis dlogis
+#define fnDpois dpois
+#define fnDt dt
+#define fnDunif dunif
+#define fnDweibull dweibull
+
+// density for continuous X & 2 pars (e.g. normal)
+// #define DENS2_d(FUN) \
+// GRAND(FUN, D, N, D, D, D, Log) \
+// GRAND(FUN, M, Mr, )
+
 
 double dnorm(const double x, const double mu, const double sigma, const bool log_form = false)
 {

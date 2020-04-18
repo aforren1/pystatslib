@@ -2,6 +2,7 @@
 #include <pybind11/eigen.h>
 #define STATS_ENABLE_EIGEN_WRAPPERS
 #include "stats.hpp"
+#include "pystats_internals.hpp"
 
 // define all distributions
 #define fnRnorm rnorm
@@ -22,52 +23,6 @@
 #define fnRunif runif
 #define fnRweibull rweibull
 // TODO multivariate distributions
-
-
-using Mxd = Eigen::MatrixXd;
-using Mxi = Eigen::Matrix<uint32_t, -1, -1>;
-using rand_engine_t = std::mt19937_64;
-
-#define outD double
-#define outI uint32_t
-#define outM Mxd
-#define outMi Mxi
-
-#define declD(arg) const double arg
-#define declI(arg) const uint32_t arg // TODO: check 32 or 64 bit? it's "uint_t" in the docs
-#define declN(arg)
-#define declDim(arg) const uint64_t n, const uint64_t k
-#define declSeed(arg) const uint64_t seed_val = std::random_device{}()
-#define declEng(arg) rand_engine_t& engine
-
-#define tempM <Mxd>
-#define tempMi <Mxi>
-#define tempN
-#define eleD(arg) arg
-#define eleI(arg) arg
-#define eleSeed(arg) seed_val
-#define eleEng(arg) engine
-#define eleDim(arg) n, k
-#define eleN(arg)
-
-#define commaD ,
-#define commaI ,
-#define commaSeed ,
-#define commaEng ,
-#define commaDim ,
-#define commaN
-
-// inspired by https://github.com/kaskr/adcomp/blob/master/TMB/inst/include/Vectorize.hpp
-#define GRAND(FUN, Ret, Temp, Type1, Type2, Type3, Type4) \
-out##Ret fn##FUN ( decl##Type1(arg1) comma##Type2 \
-             decl##Type2(arg2) comma##Type3 \
-             decl##Type3(arg3) comma##Type4 \
-             decl##Type4(arg4) ) \
-{ return stats::fn##FUN \
-temp##Temp ( ele##Type1(arg1) comma##Type2 \
-             ele##Type2(arg2) comma##Type3 \
-             ele##Type3(arg3) comma##Type4 \
-           ); } \
 
 // function, return type, template type, arg1 type, arg2 type, arg3 type, arg4 type (seed or rng)
 GRAND(Rnorm, D, N, N, N, N, N) // special case: rnorm can take no args to give standard normal
@@ -181,8 +136,6 @@ void rand(py::module &m)
   PybindDefs_1d(Rt, "rt", "dof", "Student's t")
   PybindDefs_2d(Runif, "runif", "a", "b", "")
   PybindDefs_2d(Rweibull, "rweibull", "shape", "scale", "Weibull")
-
-  //m.def("rpois", py::overload_cast<const double, const uint64_t>(&stats::rpois));
 
   py::class_<std::mt19937_64>(m, "Engine")
       .def(py::init<int>());
