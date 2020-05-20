@@ -9,20 +9,15 @@ using namespace pybind11::literals;
 // want <function, args..., tuple> and return py::array of dimension tuple and size matching mul(tuple)
 template<typename A, typename B>
 py::array_t<A>
-rnorm(const A x, const A y, const std::vector<size_t> &dims, stats::rand_engine_t& z)
+rnorm(const A x, const B y, const std::vector<size_t> &size, stats::rand_engine_t& engine)
 {
-    size_t out_size = 1;
-    for (const auto& e: dims)
+    auto out_array = py::array_t<A, py::array::c_style>(size);
+    const auto info = out_array.request();
+    A* r = static_cast<A*>(info.ptr);
+    for (int i = 0; i < info.size; i++)
     {
-        out_size *= e;
+        r[i] = stats::rnorm(x, y, engine);
     }
-    auto out_array = py::array_t<A, py::array::c_style>(dims);
-    double* r = static_cast<double*>(out_array.request().ptr);
-    for (int i = 0; i < out_size; i++)
-    {
-        r[i] = stats::rnorm(x, y, z);
-    }
-    //out_array.shape = dims;
     return out_array;
 }
 

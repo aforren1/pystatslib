@@ -9,4 +9,6 @@ void dens(py::module &m)
 {
     m.def("dnorm", py::vectorize(&stats::dnorm<double, double, double>), 
           "x"_a, "mu"_a=0, "sigma"_a=1, "log_form"_a=true);
+    m.def("dbern", py::vectorize(&stats::dbern<double>),
+          "x"_a, "prob"_a, "log_form"_a=true);
 }
