@@ -11,6 +11,9 @@ void rand(py::module &m)
     py::class_<stats::rand_engine_t>(m, "Engine")
         .def(py::init<int>());
     py::object engine = m.attr("Engine")(1); // default engine
+
     m.def("rnorm", py::overload_cast<double, double, stats::rand_engine_t&>(&stats::rnorm<double, double>),
           "mu"_a=0, "sigma"_a=1, "engine"_a=engine);
+    m.def("rbern", py::overload_cast<double, stats::rand_engine_t&>(&stats::rbern<double>),
+          "prob"_a,  "engine"_a=engine);
 }

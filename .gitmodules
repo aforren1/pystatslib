@@ -3,11 +3,8 @@
 	url = https://github.com/kthohr/gcem
 [submodule "stats"]
 	path = deps/stats
-	url = https://github.com/aforren1/stats
+	url = https://github.com/kthohr/stats
         branch = typo
-[submodule "eigen"]
-	path = deps/eigen
-	url = https://gitlab.com/libeigen/eigen
 [submodule "pybind11"]
 	path = deps/pybind11
 	url = https://github.com/pybind/pybind11
