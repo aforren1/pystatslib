@@ -21,7 +21,7 @@ include_directories(SYSTEM "${DEPS_DIR}/gcem/include")
 include_directories(SYSTEM "${DEPS_DIR}/stats/include")
 
 add_subdirectory("${DEPS_DIR}/pybind11")
-pybind11_add_module(statslib src/main.cpp src/dens.cpp src/rand.cpp)
+pybind11_add_module(statslib src/main.cpp src/dens.cpp src/rand.cpp src/prob.cpp)
 
 # OpenMP support?
 find_package(OpenMP)
