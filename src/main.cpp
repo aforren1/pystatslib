@@ -12,6 +12,7 @@ namespace py = pybind11;
 void rand(py::module&);
 void dens(py::module&);
 void prob(py::module&);
+void quant(py::module&);
 
 PYBIND11_MODULE(statslib, m)
 {
@@ -19,4 +20,5 @@ PYBIND11_MODULE(statslib, m)
   dens(m);
   rand(m);
   prob(m);
+  quant(m);
 }
