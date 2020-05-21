@@ -8,8 +8,7 @@ using namespace pybind11::literals;
 
 void rand(py::module &m)
 {
-    py::class_<stats::rand_engine_t>(m, "Engine")
-        .def(py::init<int>());
+    py::class_<stats::rand_engine_t>(m, "Engine").def(py::init<int>());
     py::object engine = m.attr("Engine")(1); // default engine
 
     m.def("rnorm", py::overload_cast<double, double, stats::rand_engine_t&>(&stats::rnorm<double, double>),
