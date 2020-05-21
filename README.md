@@ -1,5 +1,17 @@
 git clone https://github.com/aforren1/pystatslib --recursive
 
-Check preprocessing: 
-call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat"
-cl /P /C src\rand.cpp
+Example usage:
+
+```python
+import statslib as sl
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+x = np.linspace(-3, 3, num=100)
+y = sl.dnorm(x, mu=0, sigma=1, log_form=False)
+y2 = norm.pdf(x, loc=0, scale=1)
+
+plt.plot(x, y - y2)
+plt.show()
+```
