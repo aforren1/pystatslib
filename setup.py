@@ -66,7 +66,7 @@ setup(
     version='0.0.1',
     author='Alexander Forrence',
     author_email='alex.forrence@gmail.com',
-    description='A test project using pybind11 and CMake',
+    description='Bindings for StatsLib (https://github.com/kthohr/stats)',
     long_description='',
     ext_modules=[CMakeExtension('statslib')],
     cmdclass=dict(build_ext=CMakeBuild),
