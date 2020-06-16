@@ -41,71 +41,71 @@ struct Vectorize1
       }
 };
 
-const auto rnorm = py::overload_cast<double, double, engine_t &>(&stats::rnorm<double, double>);
+constexpr auto rnorm = py::overload_cast<double, double, engine_t &>(&stats::rnorm<double, double>);
 Vectorize2<rnorm, double, double, std::vector<size_t>&> vrnorm;
 Vectorize2<rnorm, double, double, size_t> srnorm;
 
-const auto rbern = py::overload_cast<double, engine_t &>(&stats::rbern<double>);
+constexpr auto rbern = py::overload_cast<double, engine_t &>(&stats::rbern<double>);
 Vectorize1<rbern, double, std::vector<size_t>&> vrbern;
 Vectorize1<rbern, double, size_t> srbern;
 
-const auto rbeta = py::overload_cast<double, double, engine_t &>(&stats::rbeta<double, double>);
+constexpr auto rbeta = py::overload_cast<double, double, engine_t &>(&stats::rbeta<double, double>);
 Vectorize2<rbeta, double, double, std::vector<size_t>&> vrbeta;
 Vectorize2<rbeta, double, double, size_t> srbeta;
 
-const auto rbinom = py::overload_cast<llint_t, double, engine_t &>(&stats::rbinom<double>);
+constexpr auto rbinom = py::overload_cast<llint_t, double, engine_t &>(&stats::rbinom<double>);
 Vectorize2<rbinom, llint_t, double, std::vector<size_t>&> vrbinom;
 Vectorize2<rbinom, llint_t, double, size_t> srbinom;
 
-const auto rcauchy = py::overload_cast<double, double, engine_t &>(&stats::rcauchy<double, double>);
+constexpr auto rcauchy = py::overload_cast<double, double, engine_t &>(&stats::rcauchy<double, double>);
 Vectorize2<rcauchy, double, double, std::vector<size_t>&> vrcauchy;
 Vectorize2<rcauchy, double, double, size_t> srcauchy;
 
-const auto rchisq = py::overload_cast<double, engine_t &>(&stats::rchisq<double>);
+constexpr auto rchisq = py::overload_cast<double, engine_t &>(&stats::rchisq<double>);
 Vectorize1<rchisq, double, std::vector<size_t>&> vrchisq;
 Vectorize1<rchisq, double, size_t> srchisq;
 
-const auto rexp = py::overload_cast<double, engine_t &>(&stats::rexp<double>);
+constexpr auto rexp = py::overload_cast<double, engine_t &>(&stats::rexp<double>);
 Vectorize1<rexp, double, std::vector<size_t>&> vrexp;
 Vectorize1<rexp, double, size_t> srexp;
 
-const auto rf = py::overload_cast<double, double, engine_t &>(&stats::rf<double, double>);
+constexpr auto rf = py::overload_cast<double, double, engine_t &>(&stats::rf<double, double>);
 Vectorize2<rf, double, double, std::vector<size_t>&> vrf;
 Vectorize2<rf, double, double, size_t> srf;
 
-const auto rgamma = py::overload_cast<double, double, engine_t &>(&stats::rgamma<double, double>);
+constexpr auto rgamma = py::overload_cast<double, double, engine_t &>(&stats::rgamma<double, double>);
 Vectorize2<rgamma, double, double, std::vector<size_t>&> vrgamma;
 Vectorize2<rgamma, double, double, size_t> srgamma;
 
-const auto rinvgamma = py::overload_cast<double, double, engine_t &>(&stats::rinvgamma<double, double>);
+constexpr auto rinvgamma = py::overload_cast<double, double, engine_t &>(&stats::rinvgamma<double, double>);
 Vectorize2<rinvgamma, double, double, std::vector<size_t>&> vrinvgamma;
 Vectorize2<rinvgamma, double, double, size_t> srinvgamma;
 
-const auto rlaplace = py::overload_cast<double, double, engine_t &>(&stats::rlaplace<double, double>);
+constexpr auto rlaplace = py::overload_cast<double, double, engine_t &>(&stats::rlaplace<double, double>);
 Vectorize2<rlaplace, double, double, std::vector<size_t>&> vrlaplace;
 Vectorize2<rlaplace, double, double, size_t> srlaplace;
 
-const auto rlnorm = py::overload_cast<double, double, engine_t &>(&stats::rlnorm<double, double>);
+constexpr auto rlnorm = py::overload_cast<double, double, engine_t &>(&stats::rlnorm<double, double>);
 Vectorize2<rlnorm, double, double, std::vector<size_t>&> vrlnorm;
 Vectorize2<rlnorm, double, double, size_t> srlnorm;
 
-const auto rlogis = py::overload_cast<double, double, engine_t &>(&stats::rlogis<double, double>);
+constexpr auto rlogis = py::overload_cast<double, double, engine_t &>(&stats::rlogis<double, double>);
 Vectorize2<rlogis, double, double, std::vector<size_t>&> vrlogis;
 Vectorize2<rlogis, double, double, size_t> srlogis;
 
-const auto rpois = py::overload_cast<double, engine_t &>(&stats::rpois<double>);
+constexpr auto rpois = py::overload_cast<double, engine_t &>(&stats::rpois<double>);
 Vectorize1<rpois, double, std::vector<size_t>&> vrpois;
 Vectorize1<rpois, double, size_t> srpois;
 
-const auto rt = py::overload_cast<double, engine_t &>(&stats::rt<double>);
+constexpr auto rt = py::overload_cast<double, engine_t &>(&stats::rt<double>);
 Vectorize1<rt, double, std::vector<size_t>&> vrt;
 Vectorize1<rt, double, size_t> srt;
 
-const auto runif = py::overload_cast<double, double, engine_t &>(&stats::runif<double, double>);
+constexpr auto runif = py::overload_cast<double, double, engine_t &>(&stats::runif<double, double>);
 Vectorize2<runif, double, double, std::vector<size_t>&> vrunif;
 Vectorize2<runif, double, double, size_t> srunif;
 
-const auto rweibull = py::overload_cast<double, double, engine_t &>(&stats::rweibull<double, double>);
+constexpr auto rweibull = py::overload_cast<double, double, engine_t &>(&stats::rweibull<double, double>);
 Vectorize2<rweibull, double, double, std::vector<size_t>&> vrweibull;
 Vectorize2<rweibull, double, double, size_t> srweibull;
 
