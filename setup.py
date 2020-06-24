@@ -63,7 +63,7 @@ class CMakeBuild(build_ext):
 
 setup(
     name='statslib',
-    version='0.0.3a1',
+    version='0.0.3',
     author='Alexander Forrence',
     author_email='alex.forrence@gmail.com',
     description='Bindings for StatsLib (https://github.com/kthohr/stats)',
