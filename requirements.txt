@@ -1,2 +1,2 @@
 numpy
-msvc-runtime
+msvc-runtime; sys_platform == 'win32'
