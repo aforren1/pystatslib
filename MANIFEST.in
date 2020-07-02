@@ -2,3 +2,5 @@ global-include *.cpp
 global-include *.txt
 global-include *.hpp
 global-include *.h
+README.md
+LICENSE

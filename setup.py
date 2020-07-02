@@ -8,6 +8,16 @@ from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 from distutils.version import LooseVersion
 
+here = os.path.abspath(os.path.dirname(__file__))
+
+# get requirements
+with open(os.path.join(here, 'requirements.txt'), encoding='utf-8') as f:
+    requirements = f.read().splitlines()
+
+# description for pypi
+with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
+    desc = f.read()
+
 # thanks to https://github.com/tdegeus/pybind11_examples
 
 class CMakeExtension(Extension):
@@ -63,12 +73,25 @@ class CMakeBuild(build_ext):
 
 setup(
     name='statslib',
-    version='0.0.3',
+    version='0.0.4a2',
     author='Alexander Forrence',
     author_email='alex.forrence@gmail.com',
     description='Bindings for StatsLib (https://github.com/kthohr/stats)',
-    long_description='',
+    url='https://github.com/aforren1/pystatslib',
+    long_description=desc,
+    long_description_content_type='text/markdown',
+    install_requires=requirements,
     ext_modules=[CMakeExtension('statslib')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
+    license='Apache',
+    classifiers=[
+        'OSI Approved :: Apache Software License',
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Science/Research',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8'
+    ]
 )
