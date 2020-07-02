@@ -84,9 +84,8 @@ setup(
     ext_modules=[CMakeExtension('statslib')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
-    license='Apache',
     classifiers=[
-        'OSI Approved :: Apache Software License',
+        'License :: OSI Approved :: Apache Software License',
         'Development Status :: 4 - Beta',
         'Intended Audience :: Science/Research',
         'Programming Language :: Python :: 3',
