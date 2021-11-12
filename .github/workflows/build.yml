@@ -76,7 +76,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: wheels
-        path: ./dist
+        path: ./dist/*.zip
   
   test_source:
     runs-on: ubuntu-20.04
