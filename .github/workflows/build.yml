@@ -78,24 +78,9 @@ jobs:
         name: wheels
         path: ./dist/*.zip
   
-  test_source:
-    runs-on: ubuntu-20.04
-    needs: [build_source]
-
-    steps:
-    - uses: actions/setup-python@v2
-      name: Install Python
-      with:
-        python-version: '3.8'
-
-    - uses: actions/download-artifact@v2
-      with:
-        name: wheels
-        path: ./dist
-  
   upload:
     runs-on: ubuntu-20.04
-    needs: [test_source, build_wheels]
+    needs: [build_source, build_wheels]
     
     steps:
     - uses: actions/checkout@v2
