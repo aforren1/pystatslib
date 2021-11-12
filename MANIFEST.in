@@ -1,6 +1,10 @@
 global-include *.cpp
 global-include *.txt
 global-include *.hpp
+global-include *.ipp
 global-include *.h
+global-include *.cmake
+global-include LICENSE
 README.md
 LICENSE
+requirements.txt
